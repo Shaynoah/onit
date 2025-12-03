@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../images/image.png'
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false)
+	const [openAbout, setOpenAbout] = useState(false)
+	const [manualOpen, setManualOpen] = useState(false)
+	const aboutRef = useRef(null)
+	const aboutCloseTimeout = useRef(null)
 	const [isDark, setIsDark] = useState(false)
 
 	useEffect(() => {
@@ -13,6 +17,18 @@ const Navbar = () => {
 		window.addEventListener('keydown', onKey)
 		return () => window.removeEventListener('keydown', onKey)
 	}, [])
+
+	// close About dropdown when clicking outside
+	useEffect(() => {
+		function onDocClick (e) {
+			if (openAbout && aboutRef.current && !aboutRef.current.contains(e.target)) {
+				setOpenAbout(false)
+				setManualOpen(false)
+			}
+		}
+		document.addEventListener('mousedown', onDocClick)
+		return () => document.removeEventListener('mousedown', onDocClick)
+	}, [openAbout])
 
 	// lock body scroll while menu is open
 	useEffect(() => {
@@ -51,7 +67,31 @@ const Navbar = () => {
 
 				{/* desktop links */}
 								<ul className="hidden md:flex gap-6 items-center m-0 text-slate-800">
-					<li className="nav-item"><NavLink to="/about" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')}>About</NavLink></li>
+									<li className="nav-item nav-dropdown" ref={aboutRef}
+										onMouseEnter={() => {
+											if (aboutCloseTimeout.current) {
+												clearTimeout(aboutCloseTimeout.current)
+												aboutCloseTimeout.current = null
+											}
+											setOpenAbout(true)
+										}}
+										onMouseLeave={() => {
+											// if user manually opened (clicked), keep open until they click away
+											if (manualOpen) return
+											aboutCloseTimeout.current = setTimeout(() => setOpenAbout(false), 180)
+										}}
+									>
+										<div className="flex items-center gap-2">
+											<NavLink to="/about" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')} onClick={() => { setOpenAbout(false); setManualOpen(false) }}>About</NavLink>
+											<button aria-expanded={openAbout} aria-haspopup="true" className="nav-dropdown-toggle text-slate-800 hover:text-onit" onClick={() => { setOpenAbout(s => { const next = !s; if (next) setManualOpen(true); return next }); }}>
+												<svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="inline-block"><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+											</button>
+										</div>
+										<ul className={`nav-dropdown-menu ${openAbout ? 'open' : ''}`} role="menu" aria-label="About submenu">
+											<li role="none"><NavLink role="menuitem" to="/history" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenAbout(false); setManualOpen(false) }}>Our History</NavLink></li>
+											<li role="none"><NavLink role="menuitem" to="/board-of-directors" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenAbout(false); setManualOpen(false) }}>Board of Directors</NavLink></li>
+										</ul>
+									</li>
 					<li className="nav-item"><NavLink to="/services" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')}>Services</NavLink></li>
 					<li className="nav-item"><NavLink to="/contact" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')}>Contact</NavLink></li>
 									{/* Desktop dark mode toggle */}
@@ -99,7 +139,13 @@ const Navbar = () => {
 				<div className={`relative backdrop-blur-md bg-white/95 shadow-lg min-h-screen mobile-menu-panel ${open ? 'open' : ''}`}>
 					<div className="container py-8">
 						<ul role="menu" className="flex flex-col gap-6 text-lg fade-stagger" style={{'--delay':'40ms'}}>
-							<li><NavLink onClick={() => setOpen(false)} to="/about" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>About</NavLink></li>
+							<li>
+								<NavLink onClick={() => setOpen(false)} to="/about" className={({ isActive }) => (isActive ? 'text-onit font-semibold text-lg' : 'text-slate-700 text-lg')}>About</NavLink>
+								<ul className="pl-4 mt-2 flex flex-col gap-2">
+									<li><NavLink onClick={() => setOpen(false)} to="/history" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Our History</NavLink></li>
+									<li><NavLink onClick={() => setOpen(false)} to="/board-of-directors" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Board of Directors</NavLink></li>
+								</ul>
+							</li>
 							<li><NavLink onClick={() => setOpen(false)} to="/services" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Services</NavLink></li>
 							<li><NavLink role="menuitem" onClick={() => setOpen(false)} to="/contact" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Contact</NavLink></li>
 						</ul>
