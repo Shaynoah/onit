@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import microImg from '../images/micro2.png'
 
 const HomepageClean = () => {
+  const artRef = useRef(null)
+
+  useEffect(() => {
+    const el = artRef.current
+    if (!el) return
+    // use IntersectionObserver to trigger the entrance animation
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          el.classList.add('in-view')
+          // if you want it only once, unobserve after triggered
+          obs.unobserve(el)
+        }
+      })
+    }, { threshold: 0.2 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
   return (
     <div className="page home hero-cream">
 
@@ -33,7 +52,8 @@ const HomepageClean = () => {
             <p className="explore-subtitle text-white/90 text-lg">We offer tailor-made banking solutions to our clients drawn from various segments of the economy.</p>
           </div>
 
-          <div className="services-explore-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="services-explore-layout grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="services-explore-grid grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Safe & Secure */}
             <div className="service-explore-item text-center text-white">
               <div className="explore-icon mb-4 flex justify-center">
@@ -68,6 +88,14 @@ const HomepageClean = () => {
               </div>
               <h3 className="font-bold text-lg mb-2">24/7 Personal Support</h3>
               <p className="text-sm text-white/80">We offer customer support where and when you need it – in the branch, on your phone or online.</p>
+            </div>
+            </div>
+
+            {/* Right-side artwork: visible on large screens */}
+            <div className="services-explore-art hidden lg:flex justify-center items-center">
+              <div ref={artRef} className="art-frame w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-400">
+                <img src={microImg} alt="Microfinance" className="w-full object-cover img-float" />
+              </div>
             </div>
           </div>
         </div>

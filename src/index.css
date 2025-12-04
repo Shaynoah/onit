@@ -38,9 +38,9 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
 
 /* HERO gradient animation */
 @keyframes heroPan {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { background-position: 40% 50%; }
+  50% { background-position: 60% 50%; }
+  100% { background-position: 40% 50%; }
 }
 @keyframes bg-pan {
   0% { background-position: 0% 50% }
@@ -1031,9 +1031,21 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
   .about-intro-sub { font-size: 0.95rem }
 }
 
-/* Strong full-bleed hero styles */
-.hero-strong { position: relative; overflow: hidden; }
-.hero-strong-bg { position: absolute; inset: 0; background: linear-gradient(120deg, #021428 0%, #071a2d 40%, #061739 100%); background-size: 200% 200%; animation: heroPan 18s linear infinite; filter: contrast(1.02) saturate(1.03); z-index: 0 }
+.hero-strong { position: relative; overflow: hidden; display:flex; align-items:center; min-height: 78vh; }
+.hero-strong-bg { position: absolute; inset: 0; z-index: 0; background-color: #061739; /* gradient overlay above the image to keep text readable */
+  background-image: linear-gradient(120deg, rgba(2,20,40,0.65) 0%, rgba(7,26,45,0.45) 40%, rgba(6,23,57,0.45) 100%), url('/src/images/Microfinance.png');
+  /* show the image as a cropped photo (cover) and position slightly higher to reduce bottom whitespace */
+  background-size: cover, cover; background-position: center 30%; background-repeat: no-repeat; background-blend-mode: normal; animation: heroPan 40s linear infinite; filter: contrast(1.02) saturate(1.03); }
+
+/* Desktop: show more of the left side so image isn't strictly centered */
+@media (min-width: 1024px) {
+  .hero-strong-bg { background-position: left center; }
+}
+
+/* Extra-large screens: allow center positioning again for widest layouts */
+@media (min-width: 1600px) {
+  .hero-strong-bg { background-position: center center; }
+}
 .hero-strong-inner { position: relative; z-index: 10; color: #fff }
 .pop-bubble-container { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); z-index: 5 }
 .pop-bubble { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 140px; height: 140px; background: linear-gradient(135deg, #EF5350 0%, #E53935 100%); color: #fff; font-weight: 900; border-radius: 16px; box-shadow: 0 16px 48px rgba(239,83,80,0.32), inset 0 1px 0 rgba(255,255,255,0.1); transform: translateY(0); text-align: center; }
@@ -1045,12 +1057,20 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
 @media (max-width: 1024px) {
   .pop-bubble-container { position: relative; right: auto; top: auto; transform: none; margin-top: 2rem }
   .hero-strong-inner { padding-right: 0 }
+  .hero-strong-inner { padding-right: 0 }
   .pop-bubble { width: 120px; height: 120px; font-size: 0.95rem }
 }
 
 @media (max-width: 768px) {
   .pop-bubble { width: 100px; height: 100px; font-size: 0.85rem }
   .pop-bubble svg { width: 32px; height: 32px }
+  .hero-strong { min-height: 56vh }
+}
+
+/* Mobile: stop background pan and ensure image covers hero fully */
+@media (max-width: 768px) {
+  .hero-strong-bg { background-size: cover !important; background-position: center center !important; animation: none !important; }
+  .hero-strong { min-height: 60vh }
 }
 .hero-strong-title { font-size: clamp(2.2rem, 6.5vw, 4.4rem); font-weight: 900; color: #fff; margin: 0; letter-spacing: -0.03em; text-transform: uppercase; text-shadow: 0 2px 0 rgba(0,0,0,0.04), 0 8px 30px rgba(2,6,23,0.12) }
 .hero-strong-accent { color: #fff }
@@ -1230,6 +1250,39 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
   font-size: 0.9375rem;
   line-height: 1.5;
   margin: 0;
+}
+
+/* Animated artwork frame for Services Explore */
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(28px) scale(.98) }
+  60% { opacity: 1; transform: translateX(-6px) scale(1.01) }
+  100% { opacity: 1; transform: translateX(0) scale(1) }
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-6px) }
+  100% { transform: translateY(0) }
+}
+
+.art-frame { opacity: 0; transform: translateX(28px) scale(.98); will-change: transform, opacity; }
+.art-frame.in-view { animation: slideInRight 720ms cubic-bezier(.2,.9,.2,1) both; }
+.art-frame.in-view .img-float { animation: floatY 6s ease-in-out 1s infinite; }
+.art-frame img { display: block }
+.art-frame:hover { transform: translateY(-4px) scale(1.02); transition: transform 320ms ease }
+
+/* Tweak size for the image on large screens */
+.services-explore-art .art-frame { max-width: 560px }
+.services-explore-art .art-frame img { height: 440px; object-fit: cover; width: 100% }
+
+@media (max-width: 1366px) {
+  .services-explore-art .art-frame { max-width: 520px }
+  .services-explore-art .art-frame img { height: 400px }
+}
+
+@media (max-width: 1024px) {
+  .services-explore-art .art-frame { max-width: 420px }
+  .services-explore-art .art-frame img { height: 340px }
 }
 
 @media (max-width: 768px) {
