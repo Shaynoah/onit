@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from '../images/image.png'
+import logo from '../images/logo2.png'
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false)
@@ -61,12 +61,18 @@ const Navbar = () => {
 		<nav className="navbar bg-white shadow-sm sticky top-0 z-50">
 			<div className="container flex items-center justify-between py-3">
 				<NavLink to="/" className="flex items-center gap-3 no-underline">
-					<img src={logo} alt="Onit Bank" className="w-8 h-8 object-contain logo-glow" />
-					<div className="brand text-xl font-extrabold text-onit">Onit Bank</div>
+					<div className="brand-wrap flex items-center gap-3">
+						<img src={logo} alt="Onit Microfinance Bank" className="brand-mark" />
+						<div className="brand-text leading-tight">
+							<div className="brand-title">Onit Microfinance Bank</div>
+							<div className="brand-sub">Relationship-driven microfinance</div>
+						</div>
+					</div>
 				</NavLink>
 
 				{/* desktop links */}
 								<ul className="hidden md:flex gap-6 items-center m-0 text-slate-800">
+									<li className="nav-item"><NavLink to="/" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')}>Home</NavLink></li>
 									<li className="nav-item nav-dropdown" ref={aboutRef}
 										onMouseEnter={() => {
 											if (aboutCloseTimeout.current) {
@@ -139,6 +145,7 @@ const Navbar = () => {
 				<div className={`relative backdrop-blur-md bg-white/95 shadow-lg min-h-screen mobile-menu-panel ${open ? 'open' : ''}`}>
 					<div className="container py-8">
 						<ul role="menu" className="flex flex-col gap-6 text-lg fade-stagger" style={{'--delay':'40ms'}}>
+							<li><NavLink onClick={() => setOpen(false)} to="/" className={({ isActive }) => (isActive ? 'text-onit font-semibold text-lg' : 'text-slate-700 text-lg')}>Home</NavLink></li>
 							<li>
 								<NavLink onClick={() => setOpen(false)} to="/about" className={({ isActive }) => (isActive ? 'text-onit font-semibold text-lg' : 'text-slate-700 text-lg')}>About</NavLink>
 								<ul className="pl-4 mt-2 flex flex-col gap-2">
