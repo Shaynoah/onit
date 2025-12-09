@@ -6,8 +6,14 @@ const Navbar = () => {
 	const [open, setOpen] = useState(false)
 	const [openAbout, setOpenAbout] = useState(false)
 	const [manualOpen, setManualOpen] = useState(false)
+	const [openProducts, setOpenProducts] = useState(false)
+	const [manualOpenProducts, setManualOpenProducts] = useState(false)
+	const [openMobileProducts, setOpenMobileProducts] = useState(false)
+	const [openMobileAbout, setOpenMobileAbout] = useState(false)
 	const aboutRef = useRef(null)
+	const productsRef = useRef(null)
 	const aboutCloseTimeout = useRef(null)
+	const productsCloseTimeout = useRef(null)
 	const [isDark, setIsDark] = useState(false)
 
 	useEffect(() => {
@@ -25,10 +31,14 @@ const Navbar = () => {
 				setOpenAbout(false)
 				setManualOpen(false)
 			}
+			if (openProducts && productsRef.current && !productsRef.current.contains(e.target)) {
+				setOpenProducts(false)
+				setManualOpenProducts(false)
+			}
 		}
 		document.addEventListener('mousedown', onDocClick)
 		return () => document.removeEventListener('mousedown', onDocClick)
-	}, [openAbout])
+	}, [openAbout, openProducts])
 
 	// lock body scroll while menu is open
 	useEffect(() => {
@@ -82,7 +92,6 @@ const Navbar = () => {
 											setOpenAbout(true)
 										}}
 										onMouseLeave={() => {
-											// if user manually opened (clicked), keep open until they click away
 											if (manualOpen) return
 											aboutCloseTimeout.current = setTimeout(() => setOpenAbout(false), 180)
 										}}
@@ -98,7 +107,30 @@ const Navbar = () => {
 											<li role="none"><NavLink role="menuitem" to="/board-of-directors" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenAbout(false); setManualOpen(false) }}>Board of Directors</NavLink></li>
 										</ul>
 									</li>
-					<li className="nav-item"><NavLink to="/services" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')}>Services</NavLink></li>
+									<li className="nav-item nav-dropdown" ref={productsRef}
+										onMouseEnter={() => {
+											if (productsCloseTimeout.current) {
+												clearTimeout(productsCloseTimeout.current)
+												productsCloseTimeout.current = null
+											}
+											setOpenProducts(true)
+										}}
+										onMouseLeave={() => {
+											if (manualOpenProducts) return
+											productsCloseTimeout.current = setTimeout(() => setOpenProducts(false), 180)
+										}}
+									>
+										<div className="flex items-center gap-2">
+											<NavLink to="/services" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')} onClick={() => { setOpenProducts(false); setManualOpenProducts(false) }}>Our Products</NavLink>
+											<button aria-expanded={openProducts} aria-haspopup="true" className="nav-dropdown-toggle text-slate-800 hover:text-onit" onClick={() => { setOpenProducts(s => { const next = !s; if (next) setManualOpenProducts(true); return next }); }}>
+												<svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="inline-block"><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+											</button>
+										</div>
+										<ul className={`nav-dropdown-menu ${openProducts ? 'open' : ''}`} role="menu" aria-label="Products submenu">
+											<li role="none"><NavLink role="menuitem" to="/services#account-products" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenProducts(false); setManualOpenProducts(false) }}>Account Products</NavLink></li>
+											<li role="none"><NavLink role="menuitem" to="/services#credit-products" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenProducts(false); setManualOpenProducts(false) }}>Credit Products</NavLink></li>
+										</ul>
+									</li>
 					<li className="nav-item"><NavLink to="/contact" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-800 hover:text-onit')}>Contact</NavLink></li>
 									{/* Desktop dark mode toggle */}
 									<li>
@@ -146,14 +178,36 @@ const Navbar = () => {
 					<div className="container py-8">
 						<ul role="menu" className="flex flex-col gap-6 text-lg fade-stagger" style={{'--delay':'40ms'}}>
 							<li><NavLink onClick={() => setOpen(false)} to="/" className={({ isActive }) => (isActive ? 'text-onit font-semibold text-lg' : 'text-slate-700 text-lg')}>Home</NavLink></li>
-							<li>
-								<NavLink onClick={() => setOpen(false)} to="/about" className={({ isActive }) => (isActive ? 'text-onit font-semibold text-lg' : 'text-slate-700 text-lg')}>About</NavLink>
-								<ul className="pl-4 mt-2 flex flex-col gap-2">
-									<li><NavLink onClick={() => setOpen(false)} to="/history" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Our History</NavLink></li>
-									<li><NavLink onClick={() => setOpen(false)} to="/board-of-directors" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Board of Directors</NavLink></li>
-								</ul>
+							<li
+								onMouseEnter={() => setOpenMobileAbout(true)}
+								onMouseLeave={() => setOpenMobileAbout(false)}
+							>
+								<div className="flex items-center justify-between">
+									<button onClick={() => setOpenMobileAbout(!openMobileAbout)} className="text-slate-700 text-lg font-semibold flex-1 text-left">About</button>
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`transition-transform ${openMobileAbout ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+								</div>
+								{openMobileAbout && (
+									<ul className="pl-4 mt-2 flex flex-col gap-2">
+										<li><NavLink onClick={() => setOpen(false)} to="/history" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Our History</NavLink></li>
+										<li><NavLink onClick={() => setOpen(false)} to="/board-of-directors" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Board of Directors</NavLink></li>
+									</ul>
+								)}
 							</li>
-							<li><NavLink onClick={() => setOpen(false)} to="/services" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Services</NavLink></li>
+							<li
+								onMouseEnter={() => setOpenMobileProducts(true)}
+								onMouseLeave={() => setOpenMobileProducts(false)}
+							>
+								<div className="flex items-center justify-between">
+									<button onClick={() => setOpenMobileProducts(!openMobileProducts)} className="text-slate-700 text-lg font-semibold flex-1 text-left">Our Products</button>
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`transition-transform ${openMobileProducts ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+								</div>
+								{openMobileProducts && (
+									<ul className="pl-4 mt-2 flex flex-col gap-2">
+										<li><NavLink onClick={() => setOpen(false)} to="/services#account-products" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Account Products</NavLink></li>
+										<li><NavLink onClick={() => setOpen(false)} to="/services#credit-products" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Credit Products</NavLink></li>
+									</ul>
+								)}
+							</li>
 							<li><NavLink role="menuitem" onClick={() => setOpen(false)} to="/contact" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Contact</NavLink></li>
 						</ul>
 						{/* CTA intentionally removed per request */}

@@ -8,10 +8,10 @@ const About = () => {
   const toggle = (key) => setOpen(open === key ? null : key)
 
   return (
-    <section className="page about">
+    <section className="page about reveal-auto">
       <div className="container py-8">
         <div className="about-hero rounded-xl bg-gradient-to-br from-slate-50 to-blue-50 p-12 shadow-sm mb-8">
-          <h1 className="about-title">About</h1>
+          <h3 className="about-title">About</h3>
           <div className="about-statements mt-6 grid gap-4 sm:grid-cols-3">
             <div className="about-statement">
               <p className="statement-text">We believe financial access is a right, not a privilege.</p>
@@ -25,7 +25,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className="our-purpose-section mt-12">
+        <div className="our-purpose-section mt-12 reveal-auto">
           <h2 className="our-purpose-heading">Our Purpose</h2>
           <p className="our-purpose-subheading ">We exist to make a positive impact in Africa.</p>
         </div>
@@ -35,7 +35,7 @@ const About = () => {
             <div className="mvv-icon">🎯</div>
             <div className="mvv-body">
               <h3 className="mvv-heading">Mission</h3>
-              <p className="mvv-content">To expand access to affordable financial services that empower underserved entrepreneurs and households to thrive.</p>
+              <p className="mvv-content">Onit Microfinance Bank exists to Positively transform enterprises and communities through provision of quality products and services that are responsive to their financial needs.</p>
             </div>
           </div>
 
@@ -43,7 +43,7 @@ const About = () => {
             <div className="mvv-icon">🌟</div>
             <div className="mvv-body">
               <h3 className="mvv-heading">Vision</h3>
-              <p className="mvv-content">To be our customers’ most trusted lifetime partner, passionate about helping them achieve their financial goals. And, by helping generations achieve those goals, help build the financial prosperity of the societies, businesses and shareholders we engage with.</p>
+              <p className="mvv-content">Empowering Enterprises and communities for life</p>
             </div>
           </div>
 
@@ -53,15 +53,15 @@ const About = () => {
               <h3 className="mvv-heading">Core Values</h3>
               <ul className="mvv-list">
                 <li><strong>Integrity:</strong> We operate transparently and responsibly.</li>
-                <li><strong>Customer-first:</strong> Our services are designed around real community needs.</li>
+                <li><strong>Customer-focus:</strong> Our services are designed around real community needs.</li>
                 <li><strong>Innovation:</strong> We leverage technology to lower barriers and costs.</li>
-                <li><strong>Impact:</strong> We measure success by positive outcomes for clients.</li>
+                <li><strong>Efficiency:</strong> We optimize processes and technology to deliver faster, lower-cost, and more reliable services for our customers.</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="about-intro mt-12 mb-6">
+        <div className="about-intro mt-12 mb-6 reveal-auto">
           <h2 className="about-intro-heading">Get to know more about us</h2>
           <p className="about-intro-sub">Get to know our leaders as well as our initiatives to uplift our communities.</p>
         </div>

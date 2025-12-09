@@ -1,9 +1,9 @@
+/* Montserrat from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Montserrat from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 /* Minimal custom styles to support container widths and small tweaks */
 @layer components {
@@ -30,11 +30,39 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
   100% { background-position: 0% 50%; }
 }
 
-/* local fadeUp keyframe to ensure animation availability outside Tailwind generated classes */
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(12px); }
-  100% { opacity: 1; transform: translateY(0); }
+/* Pop-up entrance keyframe: scale + blur fade for dynamic reveal */
+@keyframes popUp {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.92) translateY(16px); 
+    filter: blur(8px);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.02) translateY(-2px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+    filter: blur(0);
+  }
 }
+
+/* Reveal on scroll helpers */
+.reveal { 
+  opacity: 0; 
+  transform: scale(0.92) translateY(16px);
+  filter: blur(8px);
+  will-change: transform, opacity, filter;
+  /* default CSS variable for optional delay (ms) */
+  --reveal-delay: 0ms;
+}
+.reveal.in-view {
+  /* pop-up style reveal: scale + blur fade with smooth easing */
+  animation: popUp 900ms cubic-bezier(.16,.84,.24,1) both;
+  animation-delay: var(--reveal-delay);
+}
+
 
 /* HERO gradient animation */
 @keyframes heroPan {
@@ -360,6 +388,51 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
 .image-overview .kpi { display:flex; gap:0.5rem; align-items:center }
 .image-overview .kpi .num { font-weight: 700; font-size: .95rem }
  .img-frame:hover .image-overview { transform: translateY(-6px); opacity: 1 }
+
+/* How It Works */
+.how-it-works .how-step { background: linear-gradient(180deg, #ffffff, #fbfdff); border: 1px solid rgba(2,6,23,0.04); }
+.how-it-works .step-pill { width:48px; height:48px; border-radius:12px; display:inline-grid; place-items:center; margin:0 auto; background: linear-gradient(90deg,var(--onit-blue),var(--onit-purple)); color:#fff; font-weight:800 }
+
+/* Testimonials */
+.testimonials .testimonial-card { transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, border-color .3s ease }
+.testimonials .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(2,6,23,0.12) }
+
+/* Fade-in animation for testimonials */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+.animate-fade-in { animation: fadeInUp 600ms ease-out both }
+
+/* Partners */
+.partners-grid .partner-logo { display:inline-flex; align-items:center; justify-content:center; min-width:120px; height:56px; border-radius:10px; background: rgba(11,105,255,0.04); color:var(--onit-dark); font-weight:700 }
+
+/* Board of Directors */
+.board-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:24px; }
+.board-member-card { background: linear-gradient(180deg, #ffffff, #fbfdff); border-radius:14px; overflow:hidden; box-shadow: 0 6px 20px rgba(2,6,23,0.06); transition: transform .32s cubic-bezier(.2,.9,.2,1), box-shadow .32s ease; }
+.board-member-card:hover { transform: translateY(-10px) scale(1.01); box-shadow: 0 18px 50px rgba(2,6,23,0.12) }
+.member-image { width:100%; height:260px; background-size: cover; background-position: center; background-repeat: no-repeat; }
+.board-member-card .member-name { font-size: 1.1rem; font-weight: 700; color: var(--onit-dark); margin: 12px 16px 4px; }
+.board-member-card .member-title { font-size: 0.9rem; font-weight: 600; color: var(--onit-blue); margin: 0 16px 8px; }
+.board-member-card .member-bio { font-size: 0.85rem; color: #6b7280; padding: 0 16px 16px; line-height: 1.5; }
+
+@media (max-width: 768px) { .board-grid { grid-template-columns: 1fr } }
+
+/* Services page */
+.services-grid { margin-top: 1rem }
+.service-card { transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease; }
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(2,6,23,0.08) }
+.service-icon { width:56px; height:56px; display:inline-grid; place-items:center; border-radius:12px; background: linear-gradient(90deg,var(--onit-blue),var(--onit-purple)); color:#fff }
+
+
+/* Products (cards) */
+.products-grid { margin-top: 1rem }
+.product-card { transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease; text-decoration: none }
+.product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(2,6,23,0.08) }
+.product-icon { width:56px; height:56px; display:inline-grid; place-items:center; border-radius:12px; background: linear-gradient(90deg,var(--onit-blue),var(--onit-purple)); color:#fff }
+.product-cta { margin-top: 8px }
+
+
 
 /* desktop-specific tweaks: left image smaller on large screens */
 @media (min-width: 1024px) {
@@ -1032,10 +1105,11 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
 }
 
 .hero-strong { position: relative; overflow: hidden; display:flex; align-items:center; min-height: 78vh; }
-.hero-strong-bg { position: absolute; inset: 0; z-index: 0; background-color: #061739; /* gradient overlay above the image to keep text readable */
-  background-image: linear-gradient(120deg, rgba(2,20,40,0.65) 0%, rgba(7,26,45,0.45) 40%, rgba(6,23,57,0.45) 100%), url('/src/images/Microfinance.png');
-  /* show the image as a cropped photo (cover) and position slightly higher to reduce bottom whitespace */
-  background-size: cover, cover; background-position: center 30%; background-repeat: no-repeat; background-blend-mode: normal; animation: heroPan 40s linear infinite; filter: contrast(1.02) saturate(1.03); }
+.hero-strong-bg { position: absolute; inset: 0; z-index: 0; background-color: #f5f3f0; /* cream brighter background */
+  background-image: linear-gradient(135deg, rgba(255,250,245,0.8) 0%, rgba(245,243,240,0.9) 50%, rgba(239,236,230,0.85) 100%);
+  background-size: cover;
+  filter: contrast(1.01) saturate(0.95);
+}
 
 /* Desktop: show more of the left side so image isn't strictly centered */
 @media (min-width: 1024px) {
@@ -1047,23 +1121,14 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
   .hero-strong-bg { background-position: center center; }
 }
 .hero-strong-inner { position: relative; z-index: 10; color: #fff }
-.pop-bubble-container { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); z-index: 5 }
-.pop-bubble { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 140px; height: 140px; background: linear-gradient(135deg, #EF5350 0%, #E53935 100%); color: #fff; font-weight: 900; border-radius: 16px; box-shadow: 0 16px 48px rgba(239,83,80,0.32), inset 0 1px 0 rgba(255,255,255,0.1); transform: translateY(0); text-align: center; }
-.pop-bubble { animation: popFloat 3200ms ease-in-out infinite; }
-@keyframes popFloat { 0% { transform: translateY(0) } 50% { transform: translateY(-8px) } 100% { transform: translateY(0) } }
-.pop-bubble span { margin-top: 0.5rem }
+/* Removed pop-bubble (UI element) per request */
 .hero-strong-inner { padding-right: 180px }
 
 @media (max-width: 1024px) {
-  .pop-bubble-container { position: relative; right: auto; top: auto; transform: none; margin-top: 2rem }
   .hero-strong-inner { padding-right: 0 }
-  .hero-strong-inner { padding-right: 0 }
-  .pop-bubble { width: 120px; height: 120px; font-size: 0.95rem }
 }
 
 @media (max-width: 768px) {
-  .pop-bubble { width: 100px; height: 100px; font-size: 0.85rem }
-  .pop-bubble svg { width: 32px; height: 32px }
   .hero-strong { min-height: 56vh }
 }
 
@@ -1072,9 +1137,18 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
   .hero-strong-bg { background-size: cover !important; background-position: center center !important; animation: none !important; }
   .hero-strong { min-height: 60vh }
 }
-.hero-strong-title { font-size: clamp(2.2rem, 6.5vw, 4.4rem); font-weight: 900; color: #fff; margin: 0; letter-spacing: -0.03em; text-transform: uppercase; text-shadow: 0 2px 0 rgba(0,0,0,0.04), 0 8px 30px rgba(2,6,23,0.12) }
-.hero-strong-accent { color: #fff }
-.hero-strong-sub { color: rgba(255,255,255,0.9); font-size: clamp(1rem, 2.2vw, 1.2rem); max-width: 52ch; margin-left: auto; margin-right: auto }
+.hero-strong-title { font-size: clamp(2.2rem, 6.5vw, 4.4rem); font-weight: 900; color: #1a1a1a; margin: 0; letter-spacing: -0.03em; text-shadow: 0 2px 0 rgba(255,255,255,0.5), 0 8px 30px rgba(2,6,23,0.08) }
+.hero-strong-accent { color: #1a1a1a }
+.hero-strong-sub { color: rgba(0,0,0,0.7); font-size: clamp(1rem, 2.2vw, 1.2rem); max-width: 52ch }
+
+/* Modern hero animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) }
+  50% { transform: translateY(-20px) }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite }
+
 .hero-strong .hero-cta-wrap .btn-primary { padding: 0.9rem 1.4rem; font-weight: 800 }
 
 @media (max-width: 768px) {
@@ -1867,7 +1941,8 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
 /* General mobile adjustments */
 @media (max-width: 768px) {
   .container {
-    @apply px-4;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   section {

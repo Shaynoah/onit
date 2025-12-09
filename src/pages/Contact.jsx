@@ -77,7 +77,7 @@ const Contact = () => {
   const [openFaq, setOpenFaq] = useState(null)
 
   return (
-    <section className="page contact py-12">
+    <section className="page contact py-12 reveal-auto">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           {/* LEFT: contact details + map */}
