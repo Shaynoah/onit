@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import microImg from '../images/micro2.png'
 import Reveal from '../components/Reveal'
 import AnimatedCounter from '../components/AnimatedCounter'
@@ -31,55 +32,83 @@ const HomepageClean = () => {
         {/* Animated background elements */}
         <div className="absolute top-10 right-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        
-        <div className="container relative z-10 py-28 md:py-36">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 max-w-6xl mx-auto">
+        {/* Mobile Banking Promo — larger, styled, positioned bottom-right on sm+ */}
+        <div className="hidden sm:block absolute right-6 bottom-6 z-30">
+          <div className="w-80 md:w-96">
+            <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-2xl p-4 md:p-5 shadow-2xl flex items-center gap-4 transform transition-all duration-200 hover:scale-102">
+              <div className="flex-none w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center text-3xl md:text-4xl font-bold">📱</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-base md:text-lg font-extrabold leading-snug">Mobile Banking — Dial <span className="font-mono bg-white/10 px-1 rounded">*356*</span></div>
+                <div className="text-sm text-white/90 mt-1">24/7 transfers • Balance • Airtime • Bills</div>
+                <div className="mt-2 text-xs text-white/80">No smartphone needed • Secure PIN verification</div>
+              </div>
+              <div className="flex-none">
+                <a href="tel:*356*" className="inline-flex items-center justify-center bg-white text-indigo-700 font-semibold px-4 py-2 rounded-lg shadow hover:bg-white/95 transition">Dial *356*</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Mobile fixed promo bar (visible on xs) */}
+        <div className="sm:hidden fixed bottom-4 left-4 right-4 z-40">
+          <div className="mx-auto max-w-lg">
+            <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-xl p-3 flex items-center justify-between gap-3 shadow-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-xl">📱</div>
+                <div className="min-w-0">
+                  <div className="text-sm font-bold truncate">Dial <span className="font-mono bg-white/10 px-1 rounded">*356*</span> — Mobile Banking</div>
+                  <div className="text-[11px] text-white/90 mt-1 truncate">Transfers • Balance • Airtime</div>
+                </div>
+              </div>
+              <a href="tel:*356*" className="ml-3 inline-flex items-center px-3 py-2 bg-white text-indigo-700 rounded-md font-semibold shadow-sm">Dial</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="container relative z-10 py-12 md:py-36">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-12 max-w-6xl mx-auto">
             {/* Left: Content */}
             <div className="hero-content text-center md:text-left">
               <div className="inline-block mb-6 px-4 py-2 rounded-full bg-blue-500/15 border border-blue-400/30">
                 <span className="text-sm font-semibold text-blue-700">💰 Financial Freedom Starts Here</span>
               </div>
               
-              <h1 className="hero-strong-title text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
+              <h1 className="hero-strong-title text-3xl md:text-5xl lg:text-7xl font-black mb-4 md:mb-6 leading-tight">
                 Save Smart,<br />
                 <span className="hero-strong-accent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Grow Faster</span>
               </h1>
               
-              <p className="hero-strong-sub text-lg md:text-xl text-gray-700 mb-8 max-w-xl">
-                Open a savings account, access instant microloans, and build wealth on your own terms — all in one place.
+              <p className="hero-strong-sub text-base md:text-lg text-gray-700 mb-4 md:mb-8 max-w-xl">
+                Banking is now easier than ever.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
-                <a href="/get-started" className="btn-primary hero-cta px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-center">
-                  Start Saving Now
-                </a>
-                <a href="/contact" className="btn-ghost hero-cta-secondary px-8 py-4 bg-gray-200/60 hover:bg-gray-300/80 text-gray-900 font-bold rounded-lg border border-gray-300 transition-all duration-300 hover:border-gray-500 text-center">
-                  Talk to Sales
-                </a>
+              <div className="flex justify-center md:justify-start mb-4 md:mb-8">
+                <Link to="/contact" className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-bold rounded-lg shadow-lg hover:scale-105 transition-transform duration-200">
+                  Contact Us
+                </Link>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-6 text-sm text-gray-700 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-6 text-xs md:text-sm text-gray-700 pt-2 md:pt-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">⚡</span>
+                  <span className="text-lg md:text-2xl">⚡</span>
                   <span><strong>Instant</strong> account setup</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">🔒</span>
+                  <span className="text-lg md:text-2xl">🔒</span>
                   <span><strong>Bank-grade</strong> security</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">📱</span>
+                  <span className="text-lg md:text-2xl">📱</span>
                   <span><strong>24/7</strong> support</span>
                 </div>
               </div>
             </div>
             
             {/* Right: Visual showcase */}
-            <div className="relative h-96 md:h-full min-h-96 flex items-center justify-center">
+            <div className="relative h-64 md:h-full min-h-64 md:min-h-96 flex items-center justify-center">
               <div className="relative w-full max-w-sm">
                 {/* Floating cards animation */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl"></div>
-                <img src={microImg} alt="Onit App" className="relative w-full rounded-3xl shadow-2xl object-cover h-80 md:h-96 animate-float" />
+                <img src={microImg} alt="Onit App" className="relative w-full rounded-3xl shadow-2xl object-cover h-64 md:h-96 animate-float" />
                 
                 {/* Floating badge */}
                 <div className="absolute -bottom-4 left-6 bg-white rounded-xl shadow-xl p-4 max-w-xs animate-bounce" style={{animationDelay: '0.5s'}}>
@@ -92,64 +121,64 @@ const HomepageClean = () => {
         </div>
       </section>
 
-      {/* Featured Products (Hero-style Briefs) */}
+      {/* Featured Spotlight — handpicked for you */}
       <Reveal>
         <section className="featured-products-hero py-20 reveal-auto relative overflow-hidden">
           <div className="container mx-auto max-w-6xl relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
               <div>
-                <div className="inline-block mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
-                  <span className="text-sm font-semibold text-blue-700">🌟 Spotlight</span>
+                <div className="inline-block mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-100">
+                  <span className="text-sm font-semibold text-indigo-700">✨ Spotlight</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-gray-900">Fast Picks — Products That Convert</h2>
-                <p className="text-gray-600 max-w-2xl text-base">Short, sharp product highlights to catch attention and drive clicks.</p>
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-gray-900">Your financial and banking needs deserve solutions that match</h2>
+                <p className="text-gray-600 max-w-2xl text-base">Find out how we can help you turn dreams into your reality.</p>
               </div>
 
               <div className="hidden sm:flex items-center gap-4">
-                <a href="/products" className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-300">
-                  <span className="text-sm">🔍 Find More Products</span>
-                </a>
+                <Link to="/services#account-products" className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-300">
+                  <span className="text-sm">Explore All Products</span>
+                </Link>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-6">
               {/* MA01: Hero Mini - left */}
-              <a href="/ma01" className="hero-mini-card group relative block p-6 rounded-3xl border border-gray-100 bg-white hover:shadow-2xl transform transition-all duration-400 hover:-translate-y-3 overflow-hidden">
-                <div className="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-blue-100 opacity-30 blur-2xl" aria-hidden />
-                <div className="relative z-10 flex items-start gap-5">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white text-3xl font-extrabold shadow">💰</div>
+              <Link to="/services/ma01" className="hero-mini-card animate-fade-in-delay-1 group relative block p-6 rounded-3xl border border-gray-100 bg-white hover:shadow-2xl transform transition-all duration-400 hover:-translate-y-3 overflow-hidden" style={{animationDelay: '0.08s'}}>
+                <div className="absolute -right-12 -top-12 w-52 h-52 rounded-full bg-indigo-100 opacity-30 blur-2xl" aria-hidden />
+                <div className="relative z-10 flex items-start gap-6">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-500 flex items-center justify-center text-white text-3xl font-extrabold shadow">💼</div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-extrabold text-gray-900">Maisha Salary Account</h3>
-                    <p className="text-gray-600 mt-1">Instant salary account — no maintenance fees, instant setup.</p>
+                    <p className="text-gray-600 mt-1">Fast salary account — instant setup, fee-free maintenance, mobile access.</p>
                     <div className="mt-4 flex items-center gap-3">
-                      <span className="inline-block px-3 py-1 text-xs bg-blue-50 text-blue-700 rounded-full">Savings • MA01</span>
-                      <span className="text-sm text-gray-500">Popular with salaried customers</span>
+                      <span className="inline-block px-3 py-1 text-xs bg-indigo-50 text-indigo-700 rounded-full">Savings • MA01</span>
+                      <span className="text-sm text-gray-500">Start in minutes</span>
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
 
-              {/* ML103: Hero Mini - right */}
-              <a href="/ml103" className="hero-mini-card group relative block p-6 rounded-3xl border border-gray-100 bg-white hover:shadow-2xl transform transition-all duration-400 hover:-translate-y-3 overflow-hidden">
-                <div className="absolute -left-10 -bottom-10 w-48 h-48 rounded-full bg-purple-100 opacity-30 blur-2xl" aria-hidden />
-                <div className="relative z-10 flex items-start gap-5">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center text-white text-3xl font-extrabold shadow">📊</div>
+              {/* MA04: Hero Mini - right */}
+              <Link to="/services/ma04" className="hero-mini-card animate-fade-in-delay-2 group relative block p-6 rounded-3xl border border-gray-100 bg-white hover:shadow-2xl transform transition-all duration-400 hover:-translate-y-3 overflow-hidden" style={{animationDelay: '0.18s'}}>
+                <div className="absolute -left-12 -bottom-12 w-52 h-52 rounded-full bg-pink-100 opacity-30 blur-2xl" aria-hidden />
+                <div className="relative z-10 flex items-start gap-6">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-pink-600 to-purple-500 flex items-center justify-center text-white text-3xl font-extrabold shadow">🚀</div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-extrabold text-gray-900">Maisha Daima Loan</h3>
-                    <p className="text-gray-600 mt-1">Secured loans for micro-enterprises — flexible, quick approvals.</p>
+                    <h3 className="text-2xl font-extrabold text-gray-900">Maisha Student Account</h3>
+                    <p className="text-gray-600 mt-1">Student account for college students — low min balance and easy mobile access.</p>
                     <div className="mt-4 flex items-center gap-3">
-                      <span className="inline-block px-3 py-1 text-xs bg-purple-50 text-purple-700 rounded-full">Loans • ML103</span>
-                      <span className="text-sm text-gray-500">Ideal for asset-backed growth</span>
+                      <span className="inline-block px-3 py-1 text-xs bg-pink-50 text-pink-700 rounded-full">Business • MA04</span>
+                      <span className="text-sm text-gray-500">Build working capital</span>
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
 
             <div className="sm:hidden text-center mb-6">
-              <a href="/products" className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-300">
-                <span>🔍 Find More Products</span>
-              </a>
+              <Link to="/services#account-products" className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-300">
+                <span>Explore All Products</span>
+              </Link>
             </div>
           </div>
         </section>
@@ -248,8 +277,9 @@ const HomepageClean = () => {
       <section className="stats-section py-20 bg-gradient-to-r from-blue-50 to-indigo-50 reveal-auto">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="stats-title text-3xl md:text-4xl font-bold text-blue-900 mb-3">Why Trust Onit ?</h2>
-            <p className="stats-subtitle text-gray-600 text-lg max-w-2xl mx-auto">Our commitment to excellence and customer satisfaction has made us a trusted partner for thousands of customers.Numbers that speak about our quality of service. </p>
+            <h2 className="stats-title text-3xl md:text-4xl font-bold text-blue-900 mb-3">Why Choose Onit Microfinance  Bank ?</h2>
+            <p className="stats-subtitle text-gray-600 text-lg max-w-2xl mx-auto">Our commitment to excellence and customer satisfaction has made us a trusted partner for thousands of customers.Numbers that speak about our quality of service.
+              Our focus is firmly on the future and empowering our communities with relevant financial products. </p>
           </div>
 
           <div className="stats-grid grid grid-cols-1 md:grid-cols-3 gap-8">
