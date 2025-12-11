@@ -183,8 +183,8 @@ const Navbar = () => {
 								onMouseLeave={() => setOpenMobileAbout(false)}
 							>
 								<div className="flex items-center justify-between">
-									<button onClick={() => setOpenMobileAbout(!openMobileAbout)} className="text-slate-700 text-lg font-semibold flex-1 text-left">About</button>
-									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`transition-transform ${openMobileAbout ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+									<NavLink onClick={() => { setOpen(false); setOpenMobileAbout(false); }} to="/about" className={({ isActive }) => `text-lg font-semibold flex-1 text-left ${isActive ? 'text-onit' : 'text-slate-700'}`}>About</NavLink>
+									<button onClick={(e) => { e.preventDefault(); setOpenMobileAbout(!openMobileAbout); }} className="p-1 text-slate-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`transition-transform ${openMobileAbout ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
 								</div>
 								{openMobileAbout && (
 									<ul className="pl-4 mt-2 flex flex-col gap-2">
@@ -198,8 +198,8 @@ const Navbar = () => {
 								onMouseLeave={() => setOpenMobileProducts(false)}
 							>
 								<div className="flex items-center justify-between">
-									<button onClick={() => setOpenMobileProducts(!openMobileProducts)} className="text-slate-700 text-lg font-semibold flex-1 text-left">Our Products</button>
-									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`transition-transform ${openMobileProducts ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+									<NavLink onClick={() => { setOpen(false); setOpenMobileProducts(false); }} to="/services" className={({ isActive }) => `text-lg font-semibold flex-1 text-left ${isActive ? 'text-onit' : 'text-slate-700'}`}>Our Products</NavLink>
+									<button onClick={(e) => { e.preventDefault(); setOpenMobileProducts(!openMobileProducts); }} className="p-1 text-slate-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`transition-transform ${openMobileProducts ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
 								</div>
 								{openMobileProducts && (
 									<ul className="pl-4 mt-2 flex flex-col gap-2">

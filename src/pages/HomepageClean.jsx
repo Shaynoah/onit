@@ -32,18 +32,24 @@ const HomepageClean = () => {
         {/* Animated background elements */}
         <div className="absolute top-10 right-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        {/* Mobile Banking Promo — larger, styled, positioned bottom-right on sm+ */}
-        <div className="hidden sm:block absolute right-6 bottom-6 z-30">
-          <div className="w-80 md:w-96">
-            <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-2xl p-4 md:p-5 shadow-2xl flex items-center gap-4 transform transition-all duration-200 hover:scale-102">
-              <div className="flex-none w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center text-3xl md:text-4xl font-bold">📱</div>
-              <div className="flex-1 min-w-0">
-                <div className="text-base md:text-lg font-extrabold leading-snug">Mobile Banking — Dial <span className="font-mono bg-white/10 px-1 rounded">*356*</span></div>
-                <div className="text-sm text-white/90 mt-1">24/7 transfers • Balance • Airtime • Bills</div>
-                <div className="mt-2 text-xs text-white/80">No smartphone needed • Secure PIN verification</div>
-              </div>
-              <div className="flex-none">
-                <a href="tel:*356*" className="inline-flex items-center justify-center bg-white text-indigo-700 font-semibold px-4 py-2 rounded-lg shadow hover:bg-white/95 transition">Dial *356*</a>
+        {/* Mobile Banking Promo — compact, positioned bottom-right on lg+ only */}
+        <div className="hidden lg:block absolute right-4 bottom-4 z-30">
+          <div className="w-80">
+            <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-2xl p-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105">
+              <div className="flex items-start gap-4">
+                <div className="flex-none w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center text-2xl font-bold flex-shrink-0">📱</div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-sm font-extrabold leading-snug mb-1">Mobile Banking via <span className="font-mono bg-yellow-300 text-indigo-700 px-2 py-1 rounded-lg font-black text-lg">*356*</span></h3>
+                  <p className="text-xs text-white/90 mb-2 leading-relaxed">Fast, secure banking without a smartphone. Available 24/7 for all your financial needs.</p>
+                  <div className="flex flex-wrap gap-2 text-xs font-semibold text-white/95">
+                    <span className="bg-white/15 px-2 py-1 rounded-full">💸 Transfers</span>
+                    <span className="bg-white/15 px-2 py-1 rounded-full">💡 Bills</span>
+                    <span className="bg-white/15 px-2 py-1 rounded-full">👁️ Balance</span>
+                  </div>
+                </div>
+                <div className="flex-none">
+                  <a href="tel:*356*" className="inline-flex items-center justify-center bg-white text-indigo-600 font-bold px-4 py-2.5 rounded-lg shadow-lg hover:bg-gray-50 transition text-sm whitespace-nowrap">Dial Now</a>
+                </div>
               </div>
             </div>
           </div>
@@ -64,30 +70,40 @@ const HomepageClean = () => {
           </div>
         </div>
 
-        <div className="container relative z-10 py-12 md:py-36">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-12 max-w-6xl mx-auto">
+        <div className="container relative z-10 pt-4 md:pt-12 pb-12 md:pb-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-12 max-w-6xl mx-auto">
             {/* Left: Content */}
             <div className="hero-content text-center md:text-left">
-              <div className="inline-block mb-6 px-4 py-2 rounded-full bg-blue-500/15 border border-blue-400/30">
-                <span className="text-sm font-semibold text-blue-700">💰 Financial Freedom Starts Here</span>
+              <div className="inline-block mb-4 md:mb-6 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-blue-500/15 border border-blue-400/30">
+                <span className="text-xs md:text-sm font-semibold text-blue-700">💰 Financial Freedom Starts Here</span>
               </div>
               
-              <h1 className="hero-strong-title text-3xl md:text-5xl lg:text-7xl font-black mb-4 md:mb-6 leading-tight">
+              <h1 className="hero-strong-title text-2xl md:text-5xl lg:text-7xl font-black mb-4 md:mb-6 leading-tight">
                 Save Smart,<br />
                 <span className="hero-strong-accent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Grow Faster</span>
               </h1>
               
-              <p className="hero-strong-sub text-base md:text-lg text-gray-700 mb-4 md:mb-8 max-w-xl">
+              <div className="mb-6 md:mb-8 w-full md:w-auto">
+                <div className="px-4 md:px-10 py-3 md:py-6 rounded-2xl md:rounded-3xl border-2 border-indigo-400 bg-gradient-to-r from-indigo-50 via-blue-50 to-purple-50 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                  <p className="text-xs md:text-base font-bold text-gray-900 leading-relaxed text-center md:text-left">
+                    We offer fair and digital banking services.<br className="hidden md:inline" /> 
+                    <span className="block md:inline text-xs md:text-base font-black text-transparent bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text animate-pulse mt-1.5 md:mt-0 md:ml-1">Join the banking revolution</span> 
+                    <span className="block md:inline text-base md:text-2xl font-black text-indigo-600 mt-1.5 md:mt-0 md:ml-1">#GETONIT</span>
+                  </p>
+                </div>
+              </div>
+              
+              <p className="hero-strong-sub text-sm md:text-lg text-gray-700 mb-6 md:mb-8 max-w-xl text-center md:text-left">
                 Banking is now easier than ever.
               </p>
               
-              <div className="flex justify-center md:justify-start mb-4 md:mb-8">
+              <div className="flex justify-center md:justify-start mb-6 md:mb-8">
                 <Link to="/contact" className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 text-sm md:text-base bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-bold rounded-lg shadow-lg hover:scale-105 transition-transform duration-200">
                   Contact Us
                 </Link>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-6 text-xs md:text-sm text-gray-700 pt-2 md:pt-4">
+              <div className="flex flex-col gap-3 md:gap-6 text-xs md:text-sm text-gray-700 pt-2 md:pt-4 justify-center md:justify-start">
                 <div className="flex items-center gap-2">
                   <span className="text-lg md:text-2xl">⚡</span>
                   <span><strong>Instant</strong> account setup</span>
@@ -104,7 +120,7 @@ const HomepageClean = () => {
             </div>
             
             {/* Right: Visual showcase */}
-            <div className="relative h-64 md:h-full min-h-64 md:min-h-96 flex items-center justify-center">
+            <div className="relative h-64 md:h-full min-h-64 md:min-h-96 flex items-center justify-center mt-8 md:mt-0">
               <div className="relative w-full max-w-sm">
                 {/* Floating cards animation */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl"></div>

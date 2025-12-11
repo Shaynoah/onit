@@ -43,7 +43,7 @@ const Services = () => {
 
   return (
     <section className="page services reveal-auto">
-      <div className="container py-16">
+      <div className="container py-4 md:py-16">
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-extrabold">Our Services</h1>
           <p className="text-gray-600 max-w-2xl mx-auto mt-4">We provide tailored financial products and support to help microbusinesses thrive — simple, transparent and local.</p>

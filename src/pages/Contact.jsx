@@ -54,14 +54,22 @@ const Contact = () => {
     }
     setSubmitting(true)
     try {
+      // Construct message with form data
+      const messageBody = `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`
+      // Open WhatsApp with the message
+      const phoneNumber = '+254709567000'
+      const encodedMessage = encodeURIComponent(messageBody)
+      const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\D/g, '')}?text=${encodedMessage}`
+      window.open(whatsappUrl, '_blank')
+      
       await new Promise(r => setTimeout(r, 900))
-      toast.show('Message sent! We’ll get back to you soon.', { type: 'success', duration: 3500 })
+      toast.show('Message sent via WhatsApp! We\'ll get back to you soon.', { type: 'success', duration: 3500 })
       setFormData({ name: '', email: '', subject: '', message: '' })
       // show ripple briefly on the button
       setRipple(true)
       setTimeout(() => setRipple(false), 900)
     } catch (err) {
-      toast.show('Failed to send message. Try again later.', { type: 'error', duration: 5000 })
+      toast.show('Failed to open messaging app. Try again later.', { type: 'error', duration: 5000 })
       console.error(err)
     } finally {
       setSubmitting(false)
@@ -155,8 +163,8 @@ const Contact = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-sm text-slate-500">Office Hours</div>
-                    <div className="mt-1 text-lg font-semibold">Mon-Fri: <span className="font-medium">8:30 AM - 5:00 PM</span></div>
-                    <div className="text-sm text-slate-600">Sat: <span className="font-medium">9:00 AM - 1:00 PM</span></div>
+                    <div className="mt-1 text-lg font-semibold">Mon-Sat: <span className="font-medium">8:30 AM - 5:00 PM</span></div>
+                    <div className="text-sm text-slate-600">Sat: <span className="font-medium">8:30 AM - 1:00 PM</span></div>
                     <div className="text-sm text-slate-600">Sun: <span className="font-medium">Closed</span></div>
                   </div>
                   <div className="text-right">
@@ -170,22 +178,30 @@ const Contact = () => {
               <div className="rounded-lg p-3 bg-white/80 dark:bg-slate-800 contact-card card-stylish animate-card-enter" style={{animationDelay:'120ms'}}>
                 <div className="text-sm text-slate-500">Follow us</div>
                 <div className="mt-2 flex gap-3 items-center">
-                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-icon social-icon-twitter w-9 h-9 rounded-full flex items-center justify-center text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3.07 12.86 12.86 0 0 1-9.32-4.72 4.48 4.48 0 0 0-.61 2.26 4.48 4.48 0 0 0 1.99 3.73 4.44 4.44 0 0 1-2.03-.56v.06a4.48 4.48 0 0 0 3.6 4.38 4.48 4.48 0 0 1-2.02.08 4.48 4.48 0 0 0 4.19 3.11A9 9 0 0 1 2 19.54 12.72 12.72 0 0 0 8.29 21c7.55 0 11.68-6.31 11.68-11.79 0-.18 0-.34-.01-.51A8.18 8.18 0 0 0 23 3z"/></svg></a>
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-icon social-icon-facebook w-9 h-9 rounded-full flex items-center justify-center text-white"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h3v4h-3v14h-5v-14h-3V6h3V4a4 4 0 0 1 4-2z"></path></svg></a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon social-icon-instagram w-9 h-9 rounded-full flex items-center justify-center text-white"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#fff"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37a4 4 0 1 1-4.63-4.63" /></svg></a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon social-icon-linkedin w-9 h-9 rounded-full flex items-center justify-center text-white"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2v7h-4v-14h4v2"></path><rect x="2" y="9" width="4" height="11"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 rounded-sm flex items-center justify-center text-white shadow-sm transform transition-transform duration-150 hover:scale-105 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2" style={{background:'#1877F2'}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 4.97 3.66 9.09 8.44 9.86v-6.99H7.9v-2.88h2.54V9.4c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.88h2.74l-.44 2.89h-2.3v6.99C18.34 21.16 22 17.05 22 12.07z"/></svg>
+                  </a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-9 h-9 rounded-sm flex items-center justify-center text-white shadow-sm transform transition-transform duration-150 hover:scale-105 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2" style={{background:'#1DA1F2'}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9.06 9.06 0 0 1-2.88 1.1 4.52 4.52 0 0 0-7.7 3.28A12.82 12.82 0 0 1 1.64 2.16a4.52 4.52 0 0 0 1.4 6.03 4.47 4.47 0 0 1-2.05-.57v.06a4.52 4.52 0 0 0 3.63 4.43 4.52 4.52 0 0 1-2.04.08 4.52 4.52 0 0 0 4.22 3.13A9.06 9.06 0 0 1 1 19.54a12.77 12.77 0 0 0 6.92 2.03c8.32 0 12.87-6.9 12.87-12.88 0-.2 0-.39-.01-.58A9.2 9.2 0 0 0 23 3z"/></svg>
+                  </a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-sm flex items-center justify-center text-white shadow-sm transform transition-transform duration-150 hover:scale-105 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2" style={{background:'#0A66C2'}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H8.799V9h3.414v1.561h.049c.476-.9 1.637-1.852 3.369-1.852 3.602 0 4.269 2.37 4.269 5.455v6.288zM5.337 7.433c-1.144 0-2.071-.929-2.071-2.074 0-1.145.927-2.074 2.071-2.074 1.146 0 2.075.929 2.075 2.074 0 1.145-.93 2.074-2.075 2.074zM7.119 20.452H3.554V9H7.12v11.452z"/></svg>
+                  </a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-sm flex items-center justify-center text-white shadow-sm transform transition-transform duration-150 hover:scale-105 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2" style={{background: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)'}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.5A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5zM18.5 6a1 1 0 1 1-1-1 1 1 0 0 1 1 1z"/></svg>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
           {/* RIGHT: contact form */}
-          <div className="rounded-xl bg-white/90 dark:bg-slate-900 p-8 shadow-lg contact-form card-stylish animate-fadeUp" style={{animationDelay: '80ms'}}>
-            <h2 className="text-2xl font-bold">Send us a message</h2>
-            <p className="mt-2 text-sm text-slate-500">We’ll get back to you within the shortest time possible.</p>
-            <form onSubmit={onSubmit} className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-xl bg-white/90 dark:bg-slate-900 p-6 md:p-8 shadow-lg contact-form card-stylish animate-fadeUp" style={{animationDelay: '80ms'}}>
+            <h2 className="text-xl md:text-2xl font-bold">Send us a message</h2>
+            <p className="mt-2 text-xs md:text-sm text-slate-500">We'll get back to you within the shortest time possible.</p>
+            <form onSubmit={onSubmit} className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div className="field">
-                <label htmlFor="name" className="field-label">Full name</label>
+                <label htmlFor="name" className="field-label text-xs md:text-sm">Full name</label>
                 <div className="relative input-with-icon">
                   <div className="input-icon left-0 flex items-center pl-3 text-slate-500 pointer-events-none"></div>
                   <input type="text" id="name" name="name" autoComplete="name" required value={formData.name} onChange={onChange} aria-invalid={errors.name ? 'true' : 'false'} aria-describedby={errors.name ? 'err-name': undefined} className={"form-input pl-10 " + (errors.name ? 'ring-2 ring-red-400' : '') + (formData.name ? ' has-value' : '')} />
@@ -194,7 +210,7 @@ const Contact = () => {
               </div>
 
               <div className="field md:col-span-2">
-                <label htmlFor="email" className="field-label">Email</label>
+                <label htmlFor="email" className="field-label text-xs md:text-sm">Email</label>
                 <div className="relative input-with-icon">
                   <div className="input-icon left-0 flex items-center pl-3 text-slate-500 pointer-events-none"></div>
                   <input type="email" id="email" name="email" autoComplete="email" required value={formData.email} onChange={onChange} aria-invalid={errors.email ? 'true' : 'false'} aria-describedby={errors.email ? 'err-email': undefined} className={"form-input pl-10 " + (errors.email ? 'ring-2 ring-red-400' : '') + (formData.email ? ' has-value' : '')} />
@@ -203,7 +219,7 @@ const Contact = () => {
               </div>
 
               <div className="field md:col-span-2">
-                <label className="field-label">Subject</label>
+                <label className="field-label text-xs md:text-sm">Subject</label>
                 <div className="relative input-with-icon">
                   <div className="input-icon left-0 flex items-center pl-3 text-slate-500 pointer-events-none"></div>
                   <input type="text" name="subject" autoComplete="off" value={formData.subject} onChange={onChange} className={"form-input pl-10 " + (formData.subject ? 'has-value' : '')} />
@@ -211,7 +227,7 @@ const Contact = () => {
               </div>
 
               <div className="field md:col-span-2">
-                <label className="field-label">Message</label>
+                <label className="field-label text-xs md:text-sm">Message</label>
                 <div className="relative input-with-icon">
                   <div className="input-icon left-0 flex items-center pl-3 text-slate-500 pointer-events-none"></div>
                   <textarea id="message" name="message" rows="5" autoComplete="off" value={formData.message} onChange={onChange} aria-invalid={errors.message ? 'true' : 'false'} aria-describedby={errors.message ? 'err-message': undefined} className={"form-input resize-y pl-10 " + (errors.message ? 'ring-2 ring-red-400' : '') + (formData.message ? ' has-value' : '')}></textarea>
@@ -220,12 +236,18 @@ const Contact = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <button type="submit" disabled={submitting} className={"inline-flex items-center gap-2 relative btn-primary shadow-lg " + (submitting ? 'opacity-60 cursor-not-allowed' : '') + (ripple ? ' success-ripple' : '')}>
+                <button type="submit" disabled={submitting} className={"inline-flex items-center gap-2 relative btn-primary shadow-lg text-xs md:text-base " + (submitting ? 'opacity-60 cursor-not-allowed' : '') + (ripple ? ' success-ripple' : '')}>
                   {submitting ? (
                     <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path></svg>
                   ) : 'Send Message'}
                 </button>
-                <button type="button" className="text-sm text-slate-500 hover:underline" onClick={(e) => { e.preventDefault(); window.location.href = 'mailto:info@maishabank.com' }}>Or email us</button>
+                <button
+                  type="button"
+                  onClick={(e) => { e.preventDefault(); window.location.href = 'mailto:info@maishabank.com' }}
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-full text-xs md:text-sm font-medium border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                >
+                  Or email us
+                </button>
               </div>
             </form>
 

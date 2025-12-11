@@ -11,7 +11,7 @@ const About = () => {
     <section className="page about reveal-auto">
       <div className="container py-8">
         <div className="about-hero rounded-xl bg-gradient-to-br from-slate-50 to-blue-50 p-12 shadow-sm mb-8">
-          <h3 className="about-title">About</h3>
+          <h2 className="about-title">About</h2>
           <div className="about-statements mt-6 grid gap-4 sm:grid-cols-3">
             <div className="about-statement">
               <p className="statement-text">We believe financial access is a right, not a privilege.</p>

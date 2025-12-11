@@ -37,6 +37,7 @@ import MC02 from './pages/MC02'
 import MF02 from './pages/MF02'
 import MB02 from './pages/MB02'
 import MB03 from './pages/MB03'
+import History from './pages/History'			
 
 function App () {
 	return (
@@ -56,9 +57,11 @@ function App () {
 					<Route path="/services/ml105" element={<ML105 />} />
 					<Route path="/services/ml106" element={<ML106 />} />
 					<Route path="/services/ml107" element={<ML107 />} />
+					<Route path="/history" element={<History />} />
 					<Route path="/services/ml108" element={<ML108 />} />
 					<Route path="/services/ml109" element={<ML109 />} />
 					<Route path="/services/ml110" element={<ML110 />} />
+
 				<Route path="/services/ml111" element={<ML111 />} />
 				<Route path="/services/ml113" element={<ML113 />} />
 				<Route path="/services/ml114" element={<ML114 />} />

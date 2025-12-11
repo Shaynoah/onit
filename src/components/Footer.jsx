@@ -1,26 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../images/image.png'
+import logo from '../images/logo2.png'
 
 const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="footer-gradient text-white mt-12">
-      <div className="container py-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+    <footer className="footer-gradient text-white mt-8">
+      <div className="container py-6 md:py-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
           {/* About / Brand */}
           <div className="md:col-span-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-md bg-white/10 flex items-center justify-center logo-float overflow-hidden logo-glow">
-                <img src={logo} alt="Onit Bank" className="w-8 h-8 object-contain" />
-              </div>
+              <img src={logo} alt="Onit Bank" className="w-16 h-16 md:w-20 md:h-20 object-contain logo-float" />
               <div>
-                <div className="text-lg font-bold">Onit Bank</div>
-                <div className="text-sm text-white/90">Empowering micro businesses — safe, simple banking.</div>
+                <div className="text-lg font-bold text-white">Onit Bank</div>
+                <div className="text-sm text-white">Empowering micro businesses — safe, simple banking.</div>
               </div>
             </div>
-            <p className="mt-4 text-sm text-white/90">Onit Bank provides reliable microfinance solutions to help entrepreneurs and communities grow and thrive.</p>
+            <p className="mt-4 text-sm text-white hidden sm:block">Onit Bank provides reliable microfinance solutions to help entrepreneurs and communities grow and thrive.</p>
           </div>
 
           {/* Quick Links */}
@@ -66,12 +64,15 @@ const Footer = () => {
               <a href="#" aria-label="LinkedIn" className="social-icon bg-white/10 text-white p-2 rounded-md" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor"><path d="M19 3A2 2 0 0121 5v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.5 18V10H6v8h2.5zM7.25 8.9c.82 0 1.5-.67 1.5-1.5s-.68-1.5-1.5-1.5-1.5.67-1.5 1.5.68 1.5 1.5 1.5zM20 18h-2.5v-3.9c0-1.18-.02-2.7-1.65-2.7-1.66 0-1.91 1.3-1.91 2.62V18H12v-8h2.4v1.09h.03c.34-.64 1.18-1.31 2.43-1.31 2.6 0 3.08 1.71 3.08 3.93V18z"></path></svg>
               </a>
+              <a href="#" aria-label="Instagram" className="social-icon bg-white/10 text-white p-2 rounded-md" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.5A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5zM18.5 6a1 1 0 1 1-1-1 1 1 0 0 1 1 1z"></path></svg>
+              </a>
             </div>
-            <div className="mt-4 text-sm text-white/80">Stay updated with our latest news and offers.</div>
+            <div className="mt-4 text-sm text-white/80 hidden sm:block">Stay updated with our latest news and offers.</div>
           </div>
         </div>
 
-        <div className="mt-8 border-t border-white/20 pt-4 text-sm text-center text-white/80">
+        <div className="mt-6 md:mt-8 border-t border-white/20 pt-3 md:pt-4 text-sm text-center text-white/80">
           <div>© {year} Onit Bank — Microfinance Institution. All rights reserved.</div>
         </div>
       </div>
