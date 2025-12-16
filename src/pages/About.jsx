@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import historyImg from '../images/Our History.jpg'
-import boardImg from '../images/Board of Directors.jpg'
 
 const About = () => {
   const [open, setOpen] = useState(null)
@@ -76,14 +75,7 @@ const About = () => {
             </div>
           </a>
 
-          <a href="/board-of-directors" className="info-card-link" aria-label="Board of Directors">
-            <div className="info-card" role="button">
-              <div className="info-card-bg" style={{ backgroundImage: `url(${boardImg})` }} />
-              <div className="info-card-overlay">
-                <h3 className="info-card-title">Board of Directors</h3>
-              </div>
-            </div>
-          </a>
+          {/* Board of Directors removed — replaced by Senior Management */}
 
           <a href="/senior-management" className="info-card-link" aria-label="Senior Management">
             <div className="info-card">

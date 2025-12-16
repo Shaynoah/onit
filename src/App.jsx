@@ -8,7 +8,7 @@ import Homepage from './pages/HomepageClean'
 import About from './pages/About'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
-import BoardOfDirectors from './pages/BoardOfDirectors'
+import SeniorManagement from './pages/BoardOfDirectors'
 import MB01 from './pages/MB01'
 import MB101 from './pages/MB101'
 import ML102 from './pages/ML102'
@@ -81,7 +81,7 @@ function App () {
 					<Route path="/services/mb03" element={<MB03 />} />
 
 					<Route path="/contact" element={<Contact />} />
-					<Route path="/board-of-directors" element={<BoardOfDirectors />} />
+					<Route path="/senior-management" element={<SeniorManagement />} />
 				</Routes>
 			</main>
 			<Footer />

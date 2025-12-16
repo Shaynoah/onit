@@ -104,7 +104,7 @@ const Navbar = () => {
 										</div>
 										<ul className={`nav-dropdown-menu ${openAbout ? 'open' : ''}`} role="menu" aria-label="About submenu">
 											<li role="none"><NavLink role="menuitem" to="/history" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenAbout(false); setManualOpen(false) }}>Our History</NavLink></li>
-											<li role="none"><NavLink role="menuitem" to="/board-of-directors" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenAbout(false); setManualOpen(false) }}>Board of Directors</NavLink></li>
+											<li role="none"><NavLink role="menuitem" to="/senior-management" className={({ isActive }) => (isActive ? 'text-onit font-semibold block px-4 py-2' : 'block px-4 py-2 text-slate-700 hover:bg-slate-50')} onClick={() => { setOpenAbout(false); setManualOpen(false) }}>Senior Management</NavLink></li>
 										</ul>
 									</li>
 									<li className="nav-item nav-dropdown" ref={productsRef}
@@ -186,10 +186,10 @@ const Navbar = () => {
 									<NavLink onClick={() => { setOpen(false); setOpenMobileAbout(false); }} to="/about" className={({ isActive }) => `text-lg font-semibold flex-1 text-left ${isActive ? 'text-onit' : 'text-slate-700'}`}>About</NavLink>
 									<button onClick={(e) => { e.preventDefault(); setOpenMobileAbout(!openMobileAbout); }} className="p-1 text-slate-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={`transition-transform ${openMobileAbout ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
 								</div>
-								{openMobileAbout && (
+										{openMobileAbout && (
 									<ul className="pl-4 mt-2 flex flex-col gap-2">
 										<li><NavLink onClick={() => setOpen(false)} to="/history" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Our History</NavLink></li>
-										<li><NavLink onClick={() => setOpen(false)} to="/board-of-directors" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Board of Directors</NavLink></li>
+										<li><NavLink onClick={() => setOpen(false)} to="/senior-management" className={({ isActive }) => (isActive ? 'text-onit font-semibold' : 'text-slate-700')}>Senior Management</NavLink></li>
 									</ul>
 								)}
 							</li>

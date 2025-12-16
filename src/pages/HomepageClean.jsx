@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import microImg from '../images/micro2.png'
+import exploreImg from '../images/A3.jpg'
 import Reveal from '../components/Reveal'
 import AnimatedCounter from '../components/AnimatedCounter'
 
@@ -251,7 +252,7 @@ const HomepageClean = () => {
             {/* Right-side artwork: visible on all screens */}
             <div className="services-explore-art flex justify-center items-center mt-8 md:mt-0">
               <div ref={artRef} className="art-frame w-full max-w-sm sm:max-w-md md:max-w-xl lg:max-w-2xl rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-400">
-                <img src={microImg} alt="Microfinance" className="w-full h-64 sm:h-80 md:h-96 object-cover img-float" />
+                <img src={exploreImg} alt="Microfinance" className="w-full h-80 sm:h-96 md:h-[520px] lg:h-[640px] object-cover object-center img-float" />
               </div>
             </div>
           </div>

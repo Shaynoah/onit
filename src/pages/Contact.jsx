@@ -81,6 +81,9 @@ const Contact = () => {
     { q: 'How long does a microloan take to get approved?', a: 'Most microloan applications are reviewed within 48 hours. Exact timelines depend on the documentation provided.' },
     { q: 'Can I access my account through mobile?', a: 'Yes — our mobile app and mobile-optimized website let you manage accounts from anywhere.' },
     { q: 'What are your support hours?', a: 'Our support team is available Mon-Fri 8:30–17:00. You can also email us anytime at info@maishabank.com.' }
+    
+    // { q: 'How do i withdraw cash to Mpesa?', a : 'our USSD code *356* allows you to withdraw cash directly to your Mpesa account quickly and securely.' }
+
   ]
   const [openFaq, setOpenFaq] = useState(null)
 
