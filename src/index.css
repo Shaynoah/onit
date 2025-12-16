@@ -1366,17 +1366,27 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
 .art-frame:hover { transform: translateY(-4px) scale(1.02); transition: transform 320ms ease }
 
 /* Tweak size for the image on large screens */
-.services-explore-art .art-frame { max-width: 560px }
-.services-explore-art .art-frame img { height: 440px; object-fit: cover; width: 100% }
+.services-explore-art .art-frame { max-width: 760px; display:flex; align-items:center; justify-content:center; background: #f8fafc }
+.services-explore-art .art-frame img { height: 520px; object-fit: cover; object-position: center 40%; width: 100% }
 
 @media (max-width: 1366px) {
-  .services-explore-art .art-frame { max-width: 520px }
-  .services-explore-art .art-frame img { height: 400px }
+  .services-explore-art .art-frame { max-width: 640px }
+  .services-explore-art .art-frame img { height: 480px; object-position: center 45% }
 }
 
 @media (max-width: 1024px) {
-  .services-explore-art .art-frame { max-width: 420px }
-  .services-explore-art .art-frame img { height: 340px }
+  .services-explore-art .art-frame { max-width: 520px }
+  .services-explore-art .art-frame img { height: 420px; object-position: center 50% }
+}
+
+/* If cover still crops too much, fall back to contain on large desktop to show full image */
+@media (min-width: 1200px) {
+  .services-explore-art .art-frame img {
+    object-fit: contain !important;
+    height: auto !important;
+    max-height: 720px !important;
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2003,5 +2013,15 @@ body { @apply bg-slate-50 text-slate-900 antialiased; font-family: 'Montserrat',
 
   .services-explore-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ensure Explore artwork is not cropped on small screens: override later cover rules */
+@media (max-width: 768px) {
+  .services-explore-art .art-frame img {
+    object-fit: contain !important;
+    height: auto !important;
+    max-height: 520px !important;
+    object-position: center !important;
   }
 }
